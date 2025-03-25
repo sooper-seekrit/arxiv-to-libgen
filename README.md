@@ -1,6 +1,9 @@
 # ArXiv Backup Tool
 
-The client is found in `arxiv_backup.py` the server in `coordination_server.py`.  First we document the client, then the server.
+The client is found in `arxiv_backup.py` the server in `coordination_server.py`.
+For bulk backups read [./BULK.md](BULK.md).
+
+First we document the client, then the server.
 
 ## Client
 
