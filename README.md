@@ -59,7 +59,48 @@ python arxiv_backup.py --query "neural networks" --run-coordination-server
    sudo systemctl start tor
    ```
 
-### Notes and Caveats
+# Server
+
+The server can be run independently from the main arXiv backup tool.
+
+## ArXiv Backup Coordination Server
+
+This server tracks which arXiv papers are being processed by different instances of the backup tool, preventing duplicate work and ensuring efficient resource usage.
+
+### Features
+
+- **RESTful API**: Endpoints for paper registration, completion, and status checking
+- **Web Interface**: Provides a human-readable status dashboard
+- **Timeout Handling**: Automatically detects and marks stalled paper processing
+- **State Persistence**: Periodically saves state to disk for recovery after restarts
+- **Summary Statistics**: Provides overview of processing status and success rates
+
+### API Endpoints
+
+- `/register` (POST): Register a paper as being processed
+- `/complete` (POST): Mark a paper as completed or failed
+- `/status` (GET): Get the status of all papers or a specific paper
+- `/summary` (GET): Get processing statistics
+- `/reset` (POST): Admin function to reset paper status
+
+### Usage
+
+Run the server independently:
+```bash
+python coordination_server.py --host 0.0.0.0 --port 5000 --admin-key your_secret_key
+```
+
+Then configure the main backup tool to use this server:
+```bash
+python arxiv_backup.py --query "machine learning" --coordination-server "http://server:5000"
+```
+
+### Security
+
+The `/reset` endpoint requires an admin key for security. Set it using the `--admin-key` parameter or the `ADMIN_KEY` environment variable.
+
+
+# Notes
 
 - The LibGen upload implementation follows the guidelines from [their wiki page](https://wiki.mhut.org/content:how_to_upload)
 - For torrent functionality, the `libtorrent-python` package is required
