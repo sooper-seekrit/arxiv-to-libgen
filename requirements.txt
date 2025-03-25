@@ -5,3 +5,4 @@ stem>=1.8.0
 pysocks>=1.7.1
 Flask>=2.0.0
 libtorrent-python>=2.0.0  # Optional: for torrent functionality
+pytest
