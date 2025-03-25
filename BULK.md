@@ -1,5 +1,7 @@
 # ArXiv Bulk Data Backup Tool
 
+First read [the readme](./README.md) and install requirements etc.
+
 The tool `bulk_backup.py` leverages arXiv's S3-based bulk data access as described in the [documentation](https://info.arxiv.org/help/bulk_data_s3.html).
 This tool is designed to efficiently back up large numbers of arXiv papers to Library Genesis while maintaining compatibility with `axriv_backup.py`'s features.
 
