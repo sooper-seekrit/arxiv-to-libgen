@@ -1,7 +1,8 @@
 # ArXiv Backup Tool
 
+The client is found in `arxiv_backup.py` the server in `coordination_server.py`.  First we document the client, then the server.
 
-## ArXiv to LibGen Backup Tool
+## Client
 
 Python tool for backing up arXiv papers to Library Genesis in case the worst happens.
 
@@ -59,13 +60,9 @@ python arxiv_backup.py --query "neural networks" --run-coordination-server
    sudo systemctl start tor
    ```
 
-# Server
+## Server
 
-The server can be run independently from the main arXiv backup tool.
-
-## ArXiv Backup Coordination Server
-
-This server tracks which arXiv papers are being processed by different instances of the backup tool, preventing duplicate work and ensuring efficient resource usage.
+The server can be run independently from the main arXiv backup tool.  This server tracks which arXiv papers are being processed by different instances of the backup tool, preventing duplicate work and ensuring efficient resource usage.
 
 ### Features
 
@@ -100,7 +97,7 @@ python arxiv_backup.py --query "machine learning" --coordination-server "http://
 The `/reset` endpoint requires an admin key for security. Set it using the `--admin-key` parameter or the `ADMIN_KEY` environment variable.
 
 
-# Notes
+## Notes
 
 - The LibGen upload implementation follows the guidelines from [their wiki page](https://wiki.mhut.org/content:how_to_upload)
 - For torrent functionality, the `libtorrent-python` package is required
