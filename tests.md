@@ -1,8 +1,65 @@
-# Tests for ArXiv Backup Tool
+# Tests for ArXiv Backup Tools
 
-Comprehensive test suites for both the ArXiv Backup Tool and the Coordination Server.
+Comprehensive test suites for 
+- ArXiv Backup Tool
+- Coordination Server
+- Bulk Backup Tool
 
-## Test Structure
+## Bulk Test Structure
+
+### Unit Tests
+
+1. **ArxivS3Client Tests**
+   - Testing S3 client initialization
+   - Listing papers (both standard and paginated)
+   - Downloading papers (to file and memory)
+   - Extracting arXiv IDs from S3 keys (including legacy format support)
+
+2. **ArxivMetadataDB Tests**
+   - Database connection handling
+   - Metadata retrieval for individual papers
+   - Batch operations
+   - Category filtering queries
+
+3. **BulkBackupProgressTracker Tests**
+   - Loading/saving progress from disk
+   - Paper status management (completed, failed, in-progress)
+   - Statistics generation
+
+### Integration Tests
+
+1. **ArxivBulkBackupWorker Tests**
+   - Worker initialization and component setup
+   - Single paper processing workflow
+   - Bulk processing from multiple sources:
+     - S3 bucket listing
+     - Metadata database queries
+     - File-based ID lists
+
+2. **Config and Main Function Tests**
+   - Command-line argument processing
+   - Configuration object creation
+
+### Test Fixtures
+
+The tests use a variety of fixtures to isolate external dependencies:
+
+1. **Mocked S3 Client** - Prevents actual AWS API calls
+2. **In-memory SQLite Database** - Creates a real database with test data
+3. **Temporary Progress Files** - For testing serialization/deserialization
+4. **Mocked LibGen and Coordination Clients** - Reuses components from original tests
+
+### Test Coverage
+
+These tests cover all major components and functionality specific to the bulk backup tool:
+
+- S3 access patterns
+- Metadata database usage
+- Progress tracking and resumability
+- Integration between components
+- Error handling and edge cases
+
+## test_arxiv_backup Structure
 
 1. **Unit Tests**: Test individual components in isolation
    - ArxivClient (search, download, metadata retrieval)
@@ -17,14 +74,14 @@ Comprehensive test suites for both the ArXiv Backup Tool and the Coordination Se
 3. **Functional Tests**: Test complete workflows
    - End-to-end paper processing with mocked external services
 
-## Key Features
+### Key Features
 
 - **Mocked Dependencies**: All external services (ArXiv API, LibGen, Tor) are mocked to avoid real network calls
 - **Temporary File Handling**: Creates and cleans up temporary directories
 - **Isolation**: Tests remain isolated from each other
 - **Configurations**: Includes pytest configuration in conftest.py
 
-## Running the Tests
+### Running the Tests
 
 To run all tests:
 ```bash
@@ -41,7 +98,7 @@ To run with coverage report:
 pytest -xvs --cov=arxiv_backup --cov=coordination_server test_arxiv_backup.py
 ```
 
-## Notable Test Cases
+### Notable Test Cases
 
 - **Memory Management**: Tests MemoryMonitor's ability to pause operations when memory usage is too high
 - **Tor Integration**: Tests TorNetwork's functionality for routing requests through Tor
