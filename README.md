@@ -7,7 +7,7 @@ First we document the client, then the server.
 
 ## Client
 
-Python tool for backing up arXiv papers to Library Genesis in case the worst happens.
+Python tool for backing up arXiv papers to Library Genesis in case the worst happens; [context](https://mathstodon.xyz/@johncarlosbaez/114157830158526572).
 
 ### Core Functionality
 - Downloads PDFs from arXiv.org using their API
