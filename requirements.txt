@@ -6,3 +6,5 @@ pysocks>=1.7.1
 Flask>=2.0.0
 libtorrent-python>=2.0.0  # Optional: for torrent functionality
 pytest
+boto3>=1.26.0
+botocore>=1.29.0
