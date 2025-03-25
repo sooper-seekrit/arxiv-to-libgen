@@ -1,0 +1,7 @@
+requests>=2.25.0
+psutil>=5.8.0
+PyPDF2>=2.0.0
+stem>=1.8.0
+pysocks>=1.7.1
+Flask>=2.0.0
+libtorrent-python>=2.0.0  # Optional: for torrent functionality
